@@ -1,0 +1,53 @@
+<mat-grid-list cols="2" rowHeight="100px">
+    <mat-grid-tile>
+        <div class="grid-tile-content">
+            <h1 class="module-name">Movie Management</h1>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="grid-tile-content align-right">
+            <button mat-raised-button color="primary" (click)="addNewMovie()">Add new movie</button>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<app-block-ui [blockUI]="isProcessing">
+    <div class="mat-elevation-z2">
+        <table mat-table [dataSource]="dataSource" class="full-width">
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef style="width: 200px">Title</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.title }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef>Description</th>
+                <td mat-cell *matCellDef="let element">{{ element.description | slice : 0 : 150 }}...</td>
+            </ng-container>
+
+            <ng-container matColumnDef="duration">
+                <th mat-header-cell *matHeaderCellDef>Duration</th>
+                <td mat-cell *matCellDef="let element">{{ element.duration }} mins</td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="align-right">Action</th>
+                <td mat-cell *matCellDef="let element" class="align-right">
+                    <button mat-icon-button color="primary" (click)="updateMovie(element.movieId)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="confirmDeleteMovie(element.movideId)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator showFirstLastButtons hidePageSize="true" length="10" pageSize="10" aria-label="Select page">
+        </mat-paginator>
+    </div>
+</app-block-ui>

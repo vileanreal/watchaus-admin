@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>
+    {{ title }}
+</h1>
+
+<div mat-dialog-content>
+    <p>{{ message }}</p>
+</div>
+
+<!-- for message box -->
+<div mat-dialog-actions align="end" *ngIf="isMessageOnly">
+    <button mat-raised-button color="primary" (click)="onDismiss()">Ok</button>
+</div>
+
+<!-- for confirmation dialog -->
+<div mat-dialog-actions align="end" *ngIf="!isMessageOnly">
+    <button mat-raised-button color="primary" (click)="onConfirm()">Yes</button>
+    <button mat-button (click)="onDismiss()">No</button>
+</div>

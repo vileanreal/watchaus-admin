@@ -1,1 +1,78 @@
-/* You can add global styles to this file, and also import other style files */
+// for npm roboto-fontface package (to load local files)
+$roboto-font-path: '~roboto-fontface/fonts' !default;
+@import '~roboto-fontface/css/roboto/sass/roboto-fontface';
+
+// for npm material-icons package (to load local files)
+$material-icons-font-path: '~material-icons/iconfont/';
+@import '~material-icons/iconfont/material-icons.scss';
+
+@import '~ngx-toastr/toastr';
+* {
+    box-sizing: border-box;
+}
+@import 'theme.scss';
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.container-fluid {
+    width: 100%;
+    max-width: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.grid-tile-content {
+    width: 100%;
+}
+
+.align-right {
+    text-align: right !important;
+}
+
+.align-center {
+    text-align: center !important;
+}
+
+.module-name {
+    font-size: 15pt;
+    color: #525c60;
+    font-weight: normal;
+    letter-spacing: 1pt;
+}
+
+.full-width-dialog .mat-dialog-container {
+    width: 100% !important;
+    max-width: 1500px !important;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.date_container {
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+mat-form-field {
+    mat-error {
+        display: none !important;
+    }
+
+    mat-error:first-child {
+        display: block !important;
+    }
+}

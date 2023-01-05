@@ -1,0 +1,67 @@
+<h2 mat-dialog-title>
+    {{ action }}
+</h2>
+<mat-dialog-content class="mat-typography">
+    <mat-form-field class="full-width" [formGroup]="userControl">
+        <mat-label>Username</mat-label>
+        <input
+            matInput
+            [(ngModel)]="userDetails.username"
+            formControlName="username"
+            required
+            autocomplete="off"
+            readonly="{{ isDisableUsername }}"
+        />
+        <mat-error *ngIf="userControl.get('username')?.invalid">Username is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" [formGroup]="userControl">
+        <mat-label>First Name</mat-label>
+        <input matInput [(ngModel)]="userDetails.firstName" formControlName="firstName" required autocomplete="off" />
+        <mat-error *ngIf="userControl.get('firstName')?.invalid">First name is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Middle Name</mat-label>
+        <input matInput [(ngModel)]="userDetails.middleName" autocomplete="off" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" [formGroup]="userControl">
+        <mat-label>Last Name</mat-label>
+        <input matInput [(ngModel)]="userDetails.lastName" formControlName="lastName" required autocomplete="off" />
+        <mat-error *ngIf="userControl.get('lastName')?.invalid">Last name is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" [formGroup]="userControl">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="userDetails.email" formControlName="email" required autocomplete="off" />
+        <mat-error *ngIf="userControl.get('email')?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="userControl.get('email')?.hasError('email')">Invalid email address</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Phone No</mat-label>
+        <input matInput [(ngModel)]="userDetails.phoneNo" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" [formGroup]="userControl">
+        <mat-label>Role</mat-label>
+        <mat-select [(ngModel)]="userDetails.roleId" formControlName="roleId" required>
+            <mat-option [value]="1">Admin</mat-option>
+            <mat-option [value]="2">Operator</mat-option>
+        </mat-select>
+        <mat-error *ngIf="userControl.get('roleId')?.invalid">Role is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" [formGroup]="userControl" [hideRequiredMarker]="userDetails.roleId != 2">
+        <mat-label>Branch</mat-label>
+        <mat-select [(ngModel)]="userDetails.branchId" formControlName="branchId" required> </mat-select>
+        <mat-error *ngIf="userControl.get('branchId')?.invalid">Branch is required when role is operator</mat-error>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-raised-button color="primary" cdkFocusInitial (click)="save()">
+        <mat-icon *ngIf="isProcessing"><mat-spinner diameter="20"> </mat-spinner></mat-icon>Save
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,25 @@
+.flexbox-parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 250px);
+}
+
+.app-name {
+    letter-spacing: 4px;
+    font-size: 16pt;
+}
+
+.app-name b {
+    color: #178b35;
+}
+
+mat-card {
+    max-width: 400px;
+    text-align: center;
+    flex: 1;
+}
+
+mat-form-field {
+    display: block;
+}

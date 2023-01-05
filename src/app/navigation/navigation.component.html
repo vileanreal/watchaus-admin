@@ -1,0 +1,30 @@
+<mat-toolbar>
+    <mat-toolbar-row class="container-fluid">
+        <h1 class="app-name">WATCHAUS</h1>
+        <a
+            mat-button
+            [routerLink]="'/movie-management'"
+            color="{{ route.url == '/movie-management' ? 'primary' : 'basic' }}"
+        >
+            Movies
+        </a>
+        <a mat-button [routerLink]="'/branches'"> Branches </a>
+        <a
+            mat-button
+            [routerLink]="'/user-management'"
+            color="{{ route.url == '/user-management' ? 'primary' : 'basic' }}"
+        >
+            Users
+        </a>
+        <a mat-button [routerLink]="'/settings'"> Settings </a>
+        <span class="spacer"></span>
+        <button mat-button [matMenuTriggerFor]="menu">
+            Hi, {{ authService.userDetails.firstName }}
+            <mat-icon>expand_more</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Change Password</button>
+            <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>
