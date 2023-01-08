@@ -1,0 +1,39 @@
+<div class="wrapper">
+    <div class="movie">
+        <input #fileInputPoster type="file" accept="image/*" hidden (change)="selectPoster($event)" />
+        <h4>
+            Poster:
+            <button mat-stroked-button color="primary" (click)="fileInputPoster.click()">Select File</button>
+        </h4>
+        <img
+            *ngIf="moviePosterSafeUrl && moviePosterSafeUrl != ''"
+            [src]="moviePosterSafeUrl"
+            alt="Image Source"
+            class="movie-poster"
+            [class.mat-elevation-z2]="true"
+        />
+    </div>
+    <div class="screenshots">
+        <input
+            #fileInputScreenshots
+            type="file"
+            accept="image/*"
+            hidden
+            (change)="selectScreenshots($event)"
+            multiple
+        />
+        <h4>
+            Screenshots:
+            <button mat-stroked-button color="primary" (click)="fileInputScreenshots.click()">Select Files</button>
+        </h4>
+        <div class="screenshots-container">
+            <img
+                *ngFor="let item of screenshotsSafeUrl"
+                [src]="item"
+                alt="Image Source"
+                class="movie-screenshots"
+                [class.mat-elevation-z2]="true"
+            />
+        </div>
+    </div>
+</div>

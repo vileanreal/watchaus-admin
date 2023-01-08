@@ -10,15 +10,7 @@
                     <mat-form-field>
                         <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" />
                     </mat-form-field>
-                    <!-- <mat-error *ngIf="!loginValid">
-                    <p>The username and password is not valid</p>
-                </mat-error> -->
-                    <button mat-raised-button color="primary" [disabled]="isProcessing">
-                        <!-- <mat-icon *ngIf="isProcessing"
-                            ><mat-spinner diameter="20"> </mat-spinner
-                        ></mat-icon> -->
-                        Login
-                    </button>
+                    <button mat-raised-button color="primary" [disabled]="isProcessing">Login</button>
                 </form>
             </app-block-ui>
         </mat-card-content>

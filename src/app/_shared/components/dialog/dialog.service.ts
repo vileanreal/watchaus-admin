@@ -9,7 +9,7 @@ export class DialogService {
     constructor(private dialog: MatDialog) {}
 
     showMessage(options: { title: string; message: string }) {
-        const dialogRef = this.dialog.open(DialogComponent, {
+        this.dialog.open(DialogComponent, {
             maxWidth: '400px',
             data: {
                 ...options,

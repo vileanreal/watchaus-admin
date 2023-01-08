@@ -1,0 +1,68 @@
+<form action="" [formGroup]="formGroup">
+    <mat-form-field class="full-width">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" required autocomplete="off" />
+        <mat-error *ngIf="formGroup.get('title')?.invalid">Title is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Duration</mat-label>
+        <input matInput formControlName="duration" required autocomplete="off" type="number" />
+        <mat-error *ngIf="formGroup.get('duration')?.invalid">Duration is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Genres</mat-label>
+        <mat-select formControlName="genre" multiple>
+            <mat-option *ngFor="let item of genreList" [value]="item.genreId">{{ item.name }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="formGroup.get('genre')?.invalid">Genre is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="width: 300px">
+        <mat-label>Showing Date: </mat-label>
+        <mat-date-range-input [rangePicker]="rangePicker">
+            <input matStartDate placeholder="Start date" formControlName="showingDateStart" />
+            <input matEndDate placeholder="End date" formControlName="showingDateEnd" />
+        </mat-date-range-input>
+        <mat-hint>YYYY-MM-DD – YYYY-MM-DD</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="rangePicker" style="font-size: 18pt"></mat-datepicker-toggle>
+        <mat-date-range-picker #rangePicker>
+            <mat-date-range-picker-actions>
+                <button mat-button matDateRangePickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+            </mat-date-range-picker-actions>
+        </mat-date-range-picker>
+        <mat-error
+            *ngIf="
+                formGroup.get('showingDateStart')?.hasError('matDatepickerParse') ||
+                formGroup.get('showingDateEnd')?.hasError('matDatepickerParse')
+            "
+        >
+            Invalid date format
+        </mat-error>
+        <mat-error
+            *ngIf="
+                formGroup.get('showingDateStart')?.hasError('required') ||
+                formGroup.get('showingDateEnd')?.hasError('required')
+            "
+        >
+            Start date / End date is required
+        </mat-error>
+
+        <mat-error
+            *ngIf="
+                formGroup.get('showingDateStart')?.hasError('matEndDateInvalid') ||
+                formGroup.get('showingDateEnd')?.hasError('matEndDateInvalid')
+            "
+        >
+            Start date should be lower than end date
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput cdkTextareaAutosize formControlName="description" required autocomplete="off"></textarea>
+        <mat-error *ngIf="formGroup.get('description')?.invalid">Description is required</mat-error>
+    </mat-form-field>
+</form>

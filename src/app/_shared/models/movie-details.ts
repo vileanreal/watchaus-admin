@@ -3,4 +3,9 @@ export class MovieDetails {
     title: string = '';
     description: string;
     duration: number | null = null;
+    genres: number[] = [];
+    moviePosterImg: string;
+    screenshots: string[];
+    showingDateStart: string;
+    showingDateEnd: string;
 }

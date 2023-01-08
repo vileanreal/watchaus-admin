@@ -7,6 +7,7 @@ $material-icons-font-path: '~material-icons/iconfont/';
 @import '~material-icons/iconfont/material-icons.scss';
 
 @import '~ngx-toastr/toastr';
+
 * {
     box-sizing: border-box;
 }
@@ -52,8 +53,17 @@ body {
 }
 
 .full-width-dialog .mat-dialog-container {
-    width: 100% !important;
-    max-width: 1500px !important;
+    width: 100vw !important;
+}
+
+.dialog-1300 .mat-dialog-container {
+    width: 100vw !important;
+    max-width: 1300px !important;
+}
+
+.dialog-1000 .mat-dialog-container {
+    width: 100vw !important;
+    max-width: 1000px !important;
 }
 
 .full-width {
@@ -75,4 +85,8 @@ mat-form-field {
     mat-error:first-child {
         display: block !important;
     }
+}
+
+input:read-only {
+    color: #757575;
 }

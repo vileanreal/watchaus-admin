@@ -1,0 +1,28 @@
+.wrapper {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.wrapper > .movie {
+    width: 250px;
+}
+
+.wrapper > .screenshots {
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.movie-poster {
+    width: 200px;
+}
+
+.screenshots-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.movie-screenshots {
+    width: 300px;
+}

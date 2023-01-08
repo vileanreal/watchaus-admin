@@ -18,15 +18,7 @@ export class UserModalComponent implements OnInit {
     action: string = 'Add User';
     userDetails: UserDetails = new UserDetails();
     isProcessing: boolean = false;
-
-    userControl: FormGroup = new FormGroup({
-        username: new FormControl('', [Validators.required, ValidationHelper.notWhiteSpace]),
-        firstName: new FormControl('', [Validators.required, ValidationHelper.notWhiteSpace]),
-        lastName: new FormControl('', [Validators.required, ValidationHelper.notWhiteSpace]),
-        email: new FormControl('', [Validators.required, ValidationHelper.notWhiteSpace, Validators.email]),
-        roleId: new FormControl('', [Validators.required, ValidationHelper.id]),
-        branchId: new FormControl(0, null),
-    });
+    formGroup: FormGroup;
 
     constructor(
         private userService: UsersService,
@@ -35,7 +27,7 @@ export class UserModalComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public data: UserModalData
     ) {
         this.dialogRef.disableClose = true;
-        this.dialogRef.addPanelClass('full-width-dialog');
+        this.dialogRef.addPanelClass('dialog-1000');
 
         if (data && data.action) {
             this.action = data.action;
@@ -46,24 +38,49 @@ export class UserModalComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.cleanUserDetailsDirtyValue();
-        this.initializeUserControl();
+        this.initializeFormGroup();
     }
 
-    cleanUserDetailsDirtyValue() {
-        this.userDetails.roleId = this.userDetails.roleId || 0;
-        this.userDetails.branchId = this.userDetails.branchId || 0;
-    }
+    initializeFormGroup() {
+        // init form group
+        this.formGroup = new FormGroup({
+            username: new FormControl(this.userDetails.username, [Validators.required, ValidationHelper.notWhiteSpace]),
+            firstName: new FormControl(this.userDetails.firstName, [
+                Validators.required,
+                ValidationHelper.notWhiteSpace,
+            ]),
+            middleName: new FormControl(this.userDetails.middleName, [ValidationHelper.notWhiteSpace]),
+            lastName: new FormControl(this.userDetails.lastName, [Validators.required, ValidationHelper.notWhiteSpace]),
+            phoneNo: new FormControl(this.userDetails.phoneNo, [ValidationHelper.notWhiteSpace]),
+            email: new FormControl(this.userDetails.email, [
+                Validators.required,
+                ValidationHelper.notWhiteSpace,
+                Validators.email,
+            ]),
+            roleId: new FormControl(this.userDetails.roleId || 0, [Validators.required, ValidationHelper.id]),
+            branchId: new FormControl(this.userDetails.branchId || 0),
+        });
 
-    initializeUserControl() {
-        this.userControl.get('roleId')?.valueChanges.subscribe({
+        // map values to user obj
+        this.formGroup.valueChanges.subscribe({
+            next: (values) => {
+                this.userDetails = {
+                    ...this.userDetails,
+                    ...values,
+                };
+            },
+        });
+
+        // handle conditional validator
+        this.formGroup.get('roleId')?.valueChanges.subscribe({
             next: (value) => {
                 if (value === Roles.OPERATOR) {
-                    this.userControl.get('branchId')?.setValidators([Validators.required, ValidationHelper.id]);
+                    this.formGroup.get('branchId')?.setValidators([Validators.required, ValidationHelper.id]);
                 } else {
-                    this.userControl.get('branchId')?.clearValidators();
+                    this.formGroup.get('branchId')?.clearValidators();
                 }
-                this.userControl.get('branchId')?.updateValueAndValidity();
+                this.formGroup.get('branchId')?.updateValueAndValidity({ onlySelf: true });
+                this.formGroup.get('branchId')?.markAsTouched();
             },
         });
     }
@@ -80,12 +97,10 @@ export class UserModalComponent implements OnInit {
     }
 
     async save() {
-        if (this.isProcessing) {
+        if (this.isProcessing || !this.isUserDetailsValid()) {
             return;
         }
-        if (!this.isUserDetailsValid()) {
-            return;
-        }
+
         let isSuccess: boolean = true;
 
         if (this.action === 'Add User') {
@@ -131,13 +146,13 @@ export class UserModalComponent implements OnInit {
     }
 
     isUserDetailsValid(): boolean {
-        let isValid = !this.userControl.invalid;
+        let isValid = !this.formGroup.invalid;
 
         if (!isValid) {
             this.toastr.warning('Please fill up all the required inputs');
         }
 
-        this.userControl.markAllAsTouched();
+        this.formGroup.markAllAsTouched();
         return isValid;
     }
 }

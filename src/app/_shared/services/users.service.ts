@@ -39,10 +39,10 @@ export class UsersService {
     addUser(userDetails: UserDetails) {
         let request = { ...userDetails };
 
-        if (request.roleId == 0) {
+        if (request.roleId === 0) {
             request.roleId = null;
         }
-        if (request.branchId == 0) {
+        if (request.branchId === 0) {
             request.branchId = null;
         }
 

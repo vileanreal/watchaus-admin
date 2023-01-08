@@ -1,7 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_shared/services/auth.service';
-import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { OperationResult } from '../_shared/models/operation-result';
 import { Router } from '@angular/router';
 import { LoggonedUserDetails } from '../_shared/models/loggoned-user-details';

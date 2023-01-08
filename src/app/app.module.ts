@@ -21,6 +21,8 @@ import { MovieManagementComponent } from './movie-management/movie-management.co
 import { MovieModalComponent } from './movie-management/modal/movie-modal/movie-modal.component';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MovieScreenshotsComponent } from './movie-management/movie-screenshots/movie-screenshots.component';
+import { MovieDetailsComponent } from './movie-management/movie-details/movie-details.component';
 
 export const MY_FORMATS = {
     parse: {
@@ -47,6 +49,8 @@ export const MY_FORMATS = {
         FooterComponent,
         MovieManagementComponent,
         MovieModalComponent,
+        MovieScreenshotsComponent,
+        MovieDetailsComponent,
     ],
     imports: [
         FormsModule,
