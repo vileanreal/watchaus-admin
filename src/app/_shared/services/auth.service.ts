@@ -8,13 +8,7 @@ import { CustomHttp } from './custom-http.service';
     providedIn: 'root',
 })
 export class AuthService {
-    private _loginUrl = 'https://localhost:7050/api/auth/login';
-
-    constructor(
-        private http: CustomHttp,
-        private _router: Router,
-        private config: ConfigService
-    ) {}
+    constructor(private http: CustomHttp, private _router: Router, private config: ConfigService) {}
 
     loginUser(username: string, password: string) {
         let url = this.config.getApiUrl() + 'auth/login';

@@ -3,7 +3,10 @@
         <input #fileInputPoster type="file" accept="image/*" hidden (change)="selectPoster($event)" />
         <h4>
             Poster:
-            <button mat-stroked-button color="primary" (click)="fileInputPoster.click()">Select File</button>
+            <button mat-stroked-button color="primary" (click)="fileInputPoster.click()">
+                <mat-icon>insert_photo</mat-icon>
+                Image
+            </button>
         </h4>
         <img
             *ngIf="moviePosterSafeUrl && moviePosterSafeUrl != ''"
@@ -24,7 +27,10 @@
         />
         <h4>
             Screenshots:
-            <button mat-stroked-button color="primary" (click)="fileInputScreenshots.click()">Select Files</button>
+            <button mat-stroked-button color="primary" (click)="fileInputScreenshots.click()">
+                <mat-icon>insert_photo</mat-icon>
+                Image
+            </button>
         </h4>
         <div class="screenshots-container">
             <img

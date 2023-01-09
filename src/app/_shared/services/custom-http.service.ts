@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpContext, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { OperationResult } from '../models/operation-result';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
 
 @Injectable({
@@ -26,7 +24,7 @@ export class CustomHttp {
 
         let message = e.message;
 
-        if (e.status == 0) {
+        if (e.status === 0) {
             message = 'Unable to connect to server.';
         }
 

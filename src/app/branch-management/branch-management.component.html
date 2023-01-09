@@ -1,0 +1,43 @@
+<mat-grid-list cols="2" rowHeight="100px">
+    <mat-grid-tile>
+        <div class="grid-tile-content">
+            <h1 class="module-name">Branch Management</h1>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="grid-tile-content align-right">
+            <button mat-raised-button color="primary" (click)="addNewBranch()">Add new branch</button>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<app-block-ui [blockUI]="isProcessing">
+    <div class="mat-elevation-z2">
+        <table mat-table [dataSource]="dataSource" class="full-width">
+            <ng-container matColumnDef="branch">
+                <th mat-header-cell *matHeaderCellDef>Branch</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.name }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="align-right" style="width: 150px">Action</th>
+                <td mat-cell *matCellDef="let element" class="align-right">
+                    <button mat-icon-button color="primary" (click)="updateBranch(element)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="confirmDeleteBranch(element.branchId)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator showFirstLastButtons hidePageSize="true" length="10" pageSize="10" aria-label="Select page">
+        </mat-paginator>
+    </div>
+</app-block-ui>

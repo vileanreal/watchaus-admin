@@ -8,6 +8,8 @@ import { firstValueFrom } from 'rxjs';
 import { Roles } from 'src/app/_shared/constants/constant';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ValidationHelper } from 'src/app/_shared/helpers/validators';
+import { BranchService } from 'src/app/_shared/services/branch.service';
+import { BranchDetails } from 'src/app/_shared/models/branch-details';
 
 @Component({
     selector: 'app-user-modal',
@@ -17,10 +19,12 @@ import { ValidationHelper } from 'src/app/_shared/helpers/validators';
 export class UserModalComponent implements OnInit {
     action: string = 'Add User';
     userDetails: UserDetails = new UserDetails();
+    branchList: BranchDetails[] = [];
     isProcessing: boolean = false;
     formGroup: FormGroup;
 
     constructor(
+        private branchService: BranchService,
         private userService: UsersService,
         private dialogRef: MatDialogRef<UserModalComponent>,
         private toastr: ToastrService,
@@ -37,8 +41,16 @@ export class UserModalComponent implements OnInit {
         }
     }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
+        this.initBranchList();
         this.initializeFormGroup();
+    }
+
+    async initBranchList() {
+        const apiResult: OperationResult<BranchDetails[]> = await firstValueFrom(this.branchService.getBranchList());
+        if (apiResult.isSuccess) {
+            this.branchList = apiResult.data;
+        }
     }
 
     initializeFormGroup() {
@@ -58,7 +70,10 @@ export class UserModalComponent implements OnInit {
                 Validators.email,
             ]),
             roleId: new FormControl(this.userDetails.roleId || 0, [Validators.required, ValidationHelper.id]),
-            branchId: new FormControl(this.userDetails.branchId || 0),
+            branchId: new FormControl(
+                this.userDetails.branchId || 0,
+                this.userDetails.roleId === Roles.OPERATOR ? [Validators.required, ValidationHelper.id] : null
+            ),
         });
 
         // map values to user obj

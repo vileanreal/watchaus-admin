@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>
+    {{ action }}
+</h2>
+<mat-dialog-content class="mat-typography">
+    <mat-form-field class="full-width" [formGroup]="formGroup">
+        <mat-label>Branch Name</mat-label>
+        <input matInput formControlName="name" required autocomplete="off" />
+        <mat-error *ngIf="formGroup.get('name')?.invalid">Branch name is required</mat-error>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-raised-button color="primary" cdkFocusInitial (click)="save()">
+        <mat-icon *ngIf="isProcessing"><mat-spinner diameter="20"> </mat-spinner></mat-icon>Save
+    </button>
+</mat-dialog-actions>

@@ -42,6 +42,7 @@
     <mat-form-field class="full-width" [formGroup]="formGroup">
         <mat-label>Role</mat-label>
         <mat-select formControlName="roleId" required>
+            <mat-option [value]="0">Select role</mat-option>
             <mat-option [value]="1">Admin</mat-option>
             <mat-option [value]="2">Operator</mat-option>
         </mat-select>
@@ -50,7 +51,10 @@
 
     <mat-form-field class="full-width" [formGroup]="formGroup" [hideRequiredMarker]="userDetails.roleId != 2">
         <mat-label>Branch</mat-label>
-        <mat-select formControlName="branchId" required> </mat-select>
+        <mat-select formControlName="branchId" required>
+            <mat-option [value]="0">Select branch</mat-option>
+            <mat-option *ngFor="let item of branchList" [value]="item.branchId">{{ item.name }}</mat-option>
+        </mat-select>
         <mat-error *ngIf="formGroup.get('branchId')?.invalid">Branch is required when role is operator</mat-error>
     </mat-form-field>
 </mat-dialog-content>

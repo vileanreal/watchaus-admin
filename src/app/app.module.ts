@@ -23,6 +23,9 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MovieScreenshotsComponent } from './movie-management/movie-screenshots/movie-screenshots.component';
 import { MovieDetailsComponent } from './movie-management/movie-details/movie-details.component';
+import { BranchManagementComponent } from './branch-management/branch-management.component';
+import { BranchModalComponent } from './branch-management/modal/branch-modal/branch-modal.component';
+import { ScreenManagementComponent } from './screen-management/screen-management.component';
 
 export const MY_FORMATS = {
     parse: {
@@ -51,6 +54,9 @@ export const MY_FORMATS = {
         MovieModalComponent,
         MovieScreenshotsComponent,
         MovieDetailsComponent,
+        BranchManagementComponent,
+        BranchModalComponent,
+        ScreenManagementComponent,
     ],
     imports: [
         FormsModule,
