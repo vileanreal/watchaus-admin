@@ -26,6 +26,7 @@ import { MovieDetailsComponent } from './movie-management/movie-details/movie-de
 import { BranchManagementComponent } from './branch-management/branch-management.component';
 import { BranchModalComponent } from './branch-management/modal/branch-modal/branch-modal.component';
 import { ScreenManagementComponent } from './screen-management/screen-management.component';
+import { ScreenModalComponent } from './screen-management/modal/screen-modal/screen-modal.component';
 
 export const MY_FORMATS = {
     parse: {
@@ -57,6 +58,7 @@ export const MY_FORMATS = {
         BranchManagementComponent,
         BranchModalComponent,
         ScreenManagementComponent,
+        ScreenModalComponent,
     ],
     imports: [
         FormsModule,

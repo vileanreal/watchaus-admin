@@ -26,7 +26,6 @@ export class BranchModalComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public data: BranchModalData
     ) {
         this.dialogRef.disableClose = true;
-        // this.dialogRef.addPanelClass('dialog-1000');
 
         if (data?.action) {
             this.action = data.action;

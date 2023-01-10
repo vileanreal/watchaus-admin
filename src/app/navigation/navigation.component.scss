@@ -1,5 +1,9 @@
 .app-name {
     font-size: 19pt;
     padding-right: 15px;
-    color: #178b35;
+
+    a {
+        text-decoration: none;
+        color: #178b35;
+    }
 }

@@ -1,0 +1,17 @@
+.home-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding-bottom: 100px;
+    height: 500px;
+    background-color: #3b8b47;
+    margin-top: 50px;
+    border-radius: 10px;
+    mat-icon {
+        color: white;
+        text-align: center;
+        flex: 1;
+        font-size: 100px;
+    }
+}

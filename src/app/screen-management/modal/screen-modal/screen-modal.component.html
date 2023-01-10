@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>
+    {{ action }}
+</h2>
+<mat-dialog-content class="mat-typography">
+    <mat-form-field class="full-width" [formGroup]="formGroup">
+        <mat-label>Screen Name</mat-label>
+        <input matInput formControlName="screenName" required autocomplete="off" />
+        <mat-error *ngIf="formGroup.get('screenName')?.invalid">Screen name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width" [formGroup]="formGroup">
+        <mat-label>No of Seats</mat-label>
+        <input matInput type="number" formControlName="noOfSeats" required autocomplete="off" />
+        <mat-error *ngIf="formGroup.get('noOfSeats')?.invalid">No of Seats is required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width" [formGroup]="formGroup">
+        <mat-label>Charge</mat-label>
+        <input matInput type="number" formControlName="charge" required autocomplete="off" />
+        <mat-error *ngIf="formGroup.get('charge')?.invalid">Charge is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" [formGroup]="formGroup">
+        <mat-label>Show Times</mat-label>
+        <mat-select formControlName="showTimes" multiple>
+            <mat-option *ngFor="let value of showTimeList" [value]="value">{{ value }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="formGroup.get('showTimes')?.invalid">Show Times is required</mat-error>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-raised-button color="primary" cdkFocusInitial (click)="save()">
+        <mat-icon *ngIf="isProcessing"><mat-spinner diameter="20"> </mat-spinner></mat-icon>Save
+    </button>
+</mat-dialog-actions>

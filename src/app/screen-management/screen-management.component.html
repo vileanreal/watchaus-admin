@@ -1,1 +1,78 @@
-<p>screen-management works!</p>
+<mat-grid-list cols="2" rowHeight="100px">
+    <mat-grid-tile>
+        <div class="grid-tile-content">
+            <h1 class="module-name">Screen Management</h1>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <div class="grid-tile-content align-right">
+            <mat-form-field style="width: 300px; margin-right: 15px">
+                <mat-label>Branch</mat-label>
+                <mat-select [(ngModel)]="selectedBranchId" (selectionChange)="getScreenList()">
+                    <mat-option [value]="0">Select branch</mat-option>
+                    <mat-option *ngFor="let item of branchList" [value]="item.branchId">{{ item.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="addNewScreen()">Add new screen</button>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<app-block-ui [blockUI]="isProcessing">
+    <div class="mat-elevation-z2">
+        <table mat-table [dataSource]="dataSource" class="full-width" aria-describedby="Screen List">
+            <ng-container matColumnDef="screenName">
+                <th mat-header-cell *matHeaderCellDef>Screen Name</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.screenName }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="noOfSeats">
+                <th mat-header-cell *matHeaderCellDef>No of seats</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.noOfSeats }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="charge">
+                <th mat-header-cell *matHeaderCellDef>Charge</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.charge | currency : 'PHP' }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="align-right" style="width: 300px">Action</th>
+                <td mat-cell *matCellDef="let element" class="align-right">
+                    <button
+                        mat-icon-button
+                        color="accent"
+                        (click)="updateScreen(element.screenId)"
+                        matTooltip="Manage assigned movies"
+                    >
+                        <mat-icon>movie</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" (click)="updateScreen(element.screenId)" matTooltip="Edit">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button
+                        mat-icon-button
+                        color="warn"
+                        (click)="confirmDeleteScreen(element.screenId)"
+                        matTooltip="Delete"
+                    >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator showFirstLastButtons hidePageSize="true" length="10" pageSize="10" aria-label="Select page">
+        </mat-paginator>
+    </div>
+</app-block-ui>

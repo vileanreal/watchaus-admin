@@ -18,6 +18,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const modules = [
     MatButtonModule,
@@ -40,6 +42,8 @@ const modules = [
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatChipsModule,
+    MatTooltipModule,
 ];
 
 @NgModule({

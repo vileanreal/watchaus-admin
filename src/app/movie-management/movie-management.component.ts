@@ -83,7 +83,7 @@ export class MovieManagementComponent implements OnInit {
         });
     }
 
-    async deleteMovie(movieId: number) {
+    async proceedToDeleteMovie(movieId: number) {
         this.isProcessing = true;
         let result: OperationResult<any> = await firstValueFrom(this.movieService.deleteMovie(movieId));
         this.isProcessing = false;
@@ -101,7 +101,7 @@ export class MovieManagementComponent implements OnInit {
         this.dialogService.confirmDialog({
             title: 'Delete movie',
             message: 'Are you sure you want to delete this movie?',
-            callback: () => this.deleteMovie(movieId),
+            callback: () => this.proceedToDeleteMovie(movieId),
         });
     }
 }
