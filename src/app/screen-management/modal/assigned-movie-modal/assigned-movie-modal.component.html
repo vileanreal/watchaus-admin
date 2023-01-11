@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>Assigned movies</h2>
+<mat-dialog-content class="mat-typography">
+    <mat-form-field style="width: 300px; margin-right: 10px">
+        <mat-label>Movies</mat-label>
+        <mat-select [(ngModel)]="selectedMovie">
+            <mat-option [value]="0">Select movie</mat-option>
+            <mat-option *ngFor="let item of movieListFiltered" [value]="item.movieId">{{ item.title }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-stroked-button color="primary" (click)="assignMovie()">Assign</button>
+
+    <app-block-ui [blockUI]="isProcessing">
+        <div class="mat-elevation-z2">
+            <table mat-table [dataSource]="dataSource" class="full-width" aria-describedby="Assigned Movie List">
+                <ng-container matColumnDef="title">
+                    <th mat-header-cell *matHeaderCellDef>Title</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.title }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef class="align-right" style="width: 200px">Action</th>
+                    <td mat-cell *matCellDef="let element" class="align-right">
+                        <button
+                            mat-icon-button
+                            color="warn"
+                            (click)="confirmRemove(element.movieId)"
+                            matTooltip="Remove"
+                        >
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No record</td>
+                </tr>
+            </table>
+        </div>
+    </app-block-ui>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" (click)="close()">Close</button>
+</mat-dialog-actions>

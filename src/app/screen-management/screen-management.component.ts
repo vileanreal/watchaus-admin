@@ -9,6 +9,10 @@ import { OperationResult } from '../_shared/models/operation-result';
 import { ScreenDetails } from '../_shared/models/screen-details';
 import { BranchService } from '../_shared/services/branch.service';
 import { ScreenService } from '../_shared/services/screen.service';
+import {
+    AssignedMovieModalComponent,
+    AssignedMovieModalData,
+} from './modal/assigned-movie-modal/assigned-movie-modal.component';
 import { ScreenModalComponent, ScreenModalData } from './modal/screen-modal/screen-modal.component';
 
 @Component({
@@ -19,7 +23,7 @@ import { ScreenModalComponent, ScreenModalData } from './modal/screen-modal/scre
 export class ScreenManagementComponent implements OnInit {
     isProcessing: boolean = false;
     branchList: BranchDetails[];
-    selectedBranchId: number = 0;
+    selectedBranchId: number = 1;
 
     displayedColumns: string[] = ['screenName', 'noOfSeats', 'charge', 'action'];
 
@@ -65,6 +69,11 @@ export class ScreenManagementComponent implements OnInit {
             return;
         }
         this.branchList = apiResult.data;
+    }
+
+    manageAssignedMovies(screenId: number) {
+        const data: AssignedMovieModalData = { screenId };
+        this.dialog.open(AssignedMovieModalComponent, { data });
     }
 
     addNewScreen() {

@@ -29,6 +29,17 @@ export class ScreenService {
         this.screenRecordsHasChangeObserver?.next(true);
     }
 
+    assignMovie(screenId: number, movieId: number) {
+        let url = this.config.getApiUrl() + `screen/assign-movie-to-screen`;
+        let body = { screenId, movieId };
+        return this.http.post(url, body);
+    }
+
+    getAssignedMovieList(screenId: number) {
+        let url = this.config.getApiUrl() + `screen/get-assigned-movie-list/${screenId}`;
+        return this.http.get(url);
+    }
+
     getScreenList(branchId: number) {
         let url = this.config.getApiUrl() + `screen/get-screen-list/${branchId}`;
         return this.http.get(url);
@@ -61,6 +72,13 @@ export class ScreenService {
     deleteScreen(screenId: number) {
         let url = this.config.getApiUrl() + `screen/delete-screen/${screenId}`;
         let body = {};
+        return this.http.delete(url, body);
+    }
+
+    removeAssignedMovie(screenId: number, movieId: number) {
+        let url = this.config.getApiUrl() + `screen/delete-assigned-movie`;
+        let body = { screenId, movieId };
+        console.log('request body: ', body);
         return this.http.delete(url, body);
     }
 }

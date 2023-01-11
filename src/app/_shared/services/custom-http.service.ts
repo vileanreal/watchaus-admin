@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
 
 @Injectable({
@@ -44,7 +44,11 @@ export class CustomHttp {
     }
 
     delete(url: string, body: any) {
-        return this.http.delete(url).pipe(catchError(this.handleError));
+        const httpOptions = {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+            body: body,
+        };
+        return this.http.delete(url, httpOptions).pipe(catchError(this.handleError));
     }
 
     put(url: string, body: any) {
