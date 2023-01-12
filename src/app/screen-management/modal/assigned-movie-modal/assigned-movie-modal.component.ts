@@ -108,7 +108,7 @@ export class AssignedMovieModalComponent implements OnInit {
 
     confirmRemove(movieId: number) {
         this.dialogService.confirmDialog({
-            title: 'Remove move',
+            title: 'Remove movie',
             message: 'Are you sure you want to remove this movie from screen?',
             callback: () => this.proceedToRemoveMovie(movieId),
         });

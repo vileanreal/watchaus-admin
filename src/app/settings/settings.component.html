@@ -1,0 +1,36 @@
+<mat-grid-list cols="2" rowHeight="100px">
+    <mat-grid-tile>
+        <div class="grid-tile-content">
+            <h1 class="module-name">Settings</h1>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<app-block-ui [blockUI]="isProcessing">
+    <table aria-label="settings" class="tbl-setting">
+        <tr>
+            <th style="width: 400px">Code</th>
+            <th>Description</th>
+            <th style="width: 500px">Value</th>
+        </tr>
+
+        <tr *ngFor="let item of settingList">
+            <td>{{ item.settingCode }}</td>
+            <td>
+                <pre>{{ item.settingDesc }}</pre>
+            </td>
+            <td>
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Value</mat-label><input matInput type="text" [(ngModel)]="item.settingVal" />
+                </mat-form-field>
+            </td>
+        </tr>
+    </table>
+</app-block-ui>
+
+<div style="padding-top: 20px; text-align: right">
+    <button mat-raised-button color="primary" (click)="confirmSave()">
+        <mat-icon diameter="5">save</mat-icon>
+        Save
+    </button>
+</div>

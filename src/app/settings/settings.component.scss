@@ -1,0 +1,24 @@
+.tbl-setting {
+    width: 100%;
+    border-spacing: 0px;
+
+    th,
+    td {
+        font-size: 10pt;
+        text-align: left;
+        padding: 10px;
+        padding-bottom: 0px;
+        border: none;
+        border-bottom: 1px solid #dadada;
+    }
+
+    th {
+        padding-bottom: 10px;
+        font-weight: normal;
+        color: #757575;
+    }
+
+    td pre {
+        font-family: inherit;
+    }
+}

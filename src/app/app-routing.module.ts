@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MovieManagementComponent } from './movie-management/movie-management.component';
 import { ScreenManagementComponent } from './screen-management/screen-management.component';
+import { SettingsComponent } from './settings/settings.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 
 const routes: Routes = [
@@ -30,6 +31,11 @@ const routes: Routes = [
     {
         path: 'screen-management',
         component: ScreenManagementComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'settings',
+        component: SettingsComponent,
         canActivate: [AuthGuard],
     },
 ];

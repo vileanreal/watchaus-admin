@@ -23,7 +23,7 @@ import { ScreenModalComponent, ScreenModalData } from './modal/screen-modal/scre
 export class ScreenManagementComponent implements OnInit {
     isProcessing: boolean = false;
     branchList: BranchDetails[];
-    selectedBranchId: number = 1;
+    selectedBranchId: number = 0;
 
     displayedColumns: string[] = ['screenName', 'noOfSeats', 'charge', 'action'];
 

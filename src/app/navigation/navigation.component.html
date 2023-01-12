@@ -1,6 +1,9 @@
+<h1 class="app-name container-fluid">
+    <a [routerLink]="'/home'">WATCHAUS <span class="divider">|</span> <span class="system">Admin</span></a>
+</h1>
+
 <mat-toolbar>
     <mat-toolbar-row class="container-fluid">
-        <h1 class="app-name"><a [routerLink]="'/home'">WATCHAUS</a></h1>
         <a
             mat-button
             [routerLink]="'/movie-management'"
@@ -8,17 +11,31 @@
         >
             Movies
         </a>
-        <a mat-button [routerLink]="'/branch-management'"> Branches </a>
-        <a mat-button [routerLink]="'/screen-management'"> Screens </a>
+        <a
+            mat-button
+            [routerLink]="'/branch-management'"
+            color="{{ route.url === '/branch-management' ? 'primary' : 'basic' }}"
+        >
+            Branches
+        </a>
+        <a
+            mat-button
+            [routerLink]="'/screen-management'"
+            color="{{ route.url === '/screen-management' ? 'primary' : 'basic' }}"
+        >
+            Screens
+        </a>
         <a
             mat-button
             [routerLink]="'/user-management'"
-            color="{{ route.url == '/user-management' ? 'primary' : 'basic' }}"
+            color="{{ route.url === '/user-management' ? 'primary' : 'basic' }}"
         >
             Users
         </a>
         <a mat-button [routerLink]="'/reports'"> Reports </a>
-        <a mat-button [routerLink]="'/settings'"> Settings </a>
+        <a mat-button [routerLink]="'/settings'" color="{{ route.url === '/settings' ? 'primary' : 'basic' }}">
+            Settings
+        </a>
         <span class="spacer"></span>
         <button mat-button [matMenuTriggerFor]="menu">
             Hi, {{ authService.userDetails.firstName }}
